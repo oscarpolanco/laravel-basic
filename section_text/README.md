@@ -40,3 +40,39 @@ On this section, we will see how to install `Laravel` in your local machine but 
 - Use the following command to start the server:
     `php artisan serve`
 - Go to your [localhost:8000](http://localhost:8000/)
+
+## Section 3: Routes and views
+
+When the browser sends an `HTTP` request to a server that is hosting your website using `Laravel`; the request will be sent to a `route` file that will look to that request and decide what to do next and that could be processing some data or get some data if is needed; when we have that data we injected to our template and compile it (Because we are using `blade` we need to compile the file) or if it doesn't need data just compile the file and send it to the user that made the request.
+
+### Creating a route
+
+One of the directories that `Laravel` create when you create your project is the `routes` directory that will handle all the request of your app. Here are the basic steps to create your route.
+
+- Go to the `routes` directory
+- Open the `web.php` file (For now, is just a basic example of routes so we're gonna concentrate on this file)
+- Use the `Route` class to create your custom route (For this example we're gonna handle the `/pizza` request)
+    ```php
+    Route::get('/pizzas', function () {
+        return view('pizzas'); // return a view
+        // return 'pizzas!;' // return a string and convert to text/html
+        // return [name => 'veg pizza', 'base' => 'classic'] // return an array and it will convert it to a JSON  
+    });
+    ```
+#### Note:
+
+If you return a `view` need to create a file with all the content of the view. Check the `view` section.
+
+### Creating a view
+
+Another directory that is created by `Laravel` is the `resources` directory that will handle the `views` and some statics files.
+
+Here are the steps to create a `view`
+
+- Go to the `resources/views` directory
+- Create a new file with `.blade.php` as it extension
+- Add your content
+
+#### Note:
+
+We create the `pizzas.blade.php` as our `view` following the example of the `route` that we did before.
