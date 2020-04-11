@@ -76,3 +76,33 @@ Here are the steps to create a `view`
 #### Note:
 
 We create the `pizzas.blade.php` as our `view` following the example of the `route` that we did before.
+
+## Section 4: Passing values to the view
+
+To pass values from the `route` to the `view` you just need to add a second parameter to the `view` function that we return when we use the `Route` class like the following example:
+
+```php
+Route::get('/pizzas', function () {
+    $pizza = [
+        'type' => 'hawaiiian',
+        'base' => 'cheese crush',
+        'price' => '10'
+    ];
+    return view('pizzas', $pizza);
+});
+```
+
+Then you will have access to the `Keys` that you send on the as a variable on the view. To use it just need to add double curly braces  and a dollar sign before it names like this example:
+
+```php
+<div class="flex-center position-ref full-height">
+    <div class="content">
+        <div class="title m-b-md">
+            Pizza List
+        </div>
+        <p>{{ $type }} {{ $base }} {{ $price }}</p>
+    </div>
+</div>
+```
+
+This will also escape the value of the variable automatically as part of the `blade` functionality.
