@@ -359,3 +359,24 @@ Here are the example files:
 ## Section 8: css & images
 
 On the directories that `Laravel` creates for us when we start the project; we got a `public` folder that is the directory that will expose to the browser so you can put your statics files there.
+
+## Section 9: Query Parameters
+
+On our `route` file we can get `query parameters` and send it to the `view` using the `request` function with the name of the `query parameter` that you need. Here is an example using the previews build pizzas `route` using this url `http://localhost:8000/pizzas?name=mario&age=30`:
+
+```php
+Route::get('/pizzas', function () {
+
+    $pizzas = [
+        ['type' => 'hawaiian', 'base' => 'chessy crust'],
+        ['type' => 'volcano', 'base' => 'garlic crust'],
+        ['type' => 'veg supreme', 'base' => 'thin & crispy']
+    ];
+
+    return view('pizzas', [
+        'pizzas' => $pizzas,
+        'name' => request('name'),
+        'age' => request('age')
+    ]);
+});
+```
