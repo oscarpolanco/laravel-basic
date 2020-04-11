@@ -81,7 +81,11 @@
             @else
                 <p>This pizza is normally priced</p>
             @endif
-        
+            
+            @unless($base == 'cheesy crust')
+                <p>You don't have chessy crust</p>
+            @endunless
+
         </div>
     </div>
 </body>
