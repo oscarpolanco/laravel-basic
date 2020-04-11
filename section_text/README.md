@@ -52,6 +52,7 @@ One of the directories that `Laravel` create when you create your project is the
 - Go to the `routes` directory
 - Open the `web.php` file (For now, is just a basic example of routes so we're gonna concentrate on this file)
 - Use the `Route` class to create your custom route (For this example we're gonna handle the `/pizza` request)
+   
     ```php
     Route::get('/pizzas', function () {
         return view('pizzas'); // return a view
@@ -106,3 +107,35 @@ Then you will have access to the `Keys` that you send on the as a variable on th
 ```
 
 This will also escape the value of the variable automatically as part of the `blade` functionality.
+
+## Section 5: Blade Basic
+
+On `Blade` you have some directives that are gonna help us to control the way that we show or not show some information on our `view`. Here are some basic examples:
+
+- `if` statement: You can use a condition to decide what you need to render.
+    ```php
+    @if($price > 15)
+        <p>This pizza is expensive</p>
+    @elseif($price < 5)
+        <p>This pizza is cheap</p>
+    @else
+        <p>This pizza is normally priced</p>
+    @endif
+    ```
+
+- `unless` statement: Conditional that is de negative of an `if` statement.
+
+    ```php
+    @unless($base == 'cheesy crust')
+        <p>You don't have chessy crust</p>
+    @endunless
+    ```
+
+- `php` block: You can set a block that you can run `PHP` code in your `view`.
+
+    ```php
+    @php
+        $name = 'shaun';
+        echo($name);
+    @endphp
+    ```
