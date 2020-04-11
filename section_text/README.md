@@ -184,3 +184,174 @@ Route::get('/pizzas', function () {
     @endforeach
     ```
     The `forEach` have also access an object call `$loop` that have some information like the `index` of the current cycle or the `first` and `last` property that are only `true` in certain point of the cycles.
+
+## Section 7: Layout files
+
+On `Blade` we can have files that represent those elements that are present on all pages like the `header` and `footer`; we only need to use `extends` and define a `content`. Here are an example:
+
+- First create new directory call `layouts` (Just an example can be anything or on the same `view` directory)
+- Create a file call `layout`
+- Delete the elements that are repeted on the `welcome.blade.php` and `pizza.blade.php`
+- Add those elementes to the `layout` file
+- At the top of the `welcome.blade.php` and `pizza.blade.php` add `@extends('layouts.layout')` (No need to use `/` just `.`)
+- Add on the current `content` of the `welcome.blade.php` and `pizza.blade.php` add `@section('content')` (could be any name) and at the end of it `@endsection`
+- On the `layout` file add `@yield('content')` (need to be the same section that you need to appear) where you need the `section` to appaer
+
+Here are the example files:
+
+`pizzas.blade.php`
+
+```php
+@extends('layouts.layout')
+
+@section('content')
+<div class="flex-center position-ref full-height">
+    <div class="content">
+        <div class="title m-b-md">
+            Pizza List
+        </div>
+
+        @foreach ($pizzas as $pizza)
+            <div>
+                {{ $loop->index }} {{ $pizza['type'] }} - {{ $pizza['base'] }}
+                @if($loop->first)
+                    <span>First in the loop</span>
+                @endif
+                @if($loop->last)
+                    <span>Last in the loop</span>
+                @endif
+            </div>
+        @endforeach
+
+    </div>
+</div>
+@endsection
+```
+
+`welcome.blade.php`
+
+```php
+@extends('layouts.layout')
+
+@section('content')
+<div class="flex-center position-ref full-height">
+    @if (Route::has('login'))
+    <div class="top-right links">
+        @auth
+        <a href="{{ url('/home') }}">Home</a>
+        @else
+        <a href="{{ route('login') }}">Login</a>
+
+        @if (Route::has('register'))
+        <a href="{{ route('register') }}">Register</a>
+        @endif
+        @endauth
+    </div>
+    @endif
+
+    <div class="content">
+        <div class="title m-b-md">
+            Pizza House<br />
+            The North Best Pizzas
+        </div>
+
+        <div class="links">
+            <a href="https://laravel.com/docs">Docs</a>
+            <a href="https://laracasts.com">Laracasts</a>
+            <a href="https://laravel-news.com">News</a>
+            <a href="https://blog.laravel.com">Blog</a>
+            <a href="https://nova.laravel.com">Nova</a>
+            <a href="https://forge.laravel.com">Forge</a>
+            <a href="https://vapor.laravel.com">Vapor</a>
+            <a href="https://github.com/laravel/laravel">GitHub</a>
+        </div>
+    </div>
+</div>
+@endsection
+```
+
+`layout.blade.php`
+```php
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Laravel</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+        <!-- Styles -->
+        <style>
+            html,
+            body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .full-height {
+                height: 100vh;
+            }
+
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
+            .position-ref {
+                position: relative;
+            }
+
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+
+            .content {
+                text-align: center;
+            }
+
+            .title {
+                font-size: 84px;
+            }
+
+            .links>a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+
+            .m-b-md {
+                margin-bottom: 30px;
+            }
+
+            footer {
+                background: #eee;
+                padding: 20px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        @yield('content')
+
+        <footer>
+            copyrigth 2020 Pizza House
+        </footer>
+    </body>
+</html>
+```
