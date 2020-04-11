@@ -187,15 +187,15 @@ Route::get('/pizzas', function () {
 
 ## Section 7: Layout files
 
-On `Blade` we can have files that represent those elements that are present on all pages like the `header` and `footer`; we only need to use `extends` and define a `content`. Here are an example:
+On `Blade` we can have files that represent those elements that are present on all pages like the `header` and `footer`; we only need to use `extends` and define a `content`. Here is an example:
 
-- First create new directory call `layouts` (Just an example can be anything or on the same `view` directory)
-- Create a file call `layout`
-- Delete the elements that are repeted on the `welcome.blade.php` and `pizza.blade.php`
-- Add those elementes to the `layout` file
+- First, create new directory call `layouts` (Just an example can be anything or on the same `view` directory)
+- Create a file called `layout`
+- Delete the elements that are repeated on the `welcome.blade.php` and `pizza.blade.php`
+- Add those elements to the `layout` file
 - At the top of the `welcome.blade.php` and `pizza.blade.php` add `@extends('layouts.layout')` (No need to use `/` just `.`)
 - Add on the current `content` of the `welcome.blade.php` and `pizza.blade.php` add `@section('content')` (could be any name) and at the end of it `@endsection`
-- On the `layout` file add `@yield('content')` (need to be the same section that you need to appear) where you need the `section` to appaer
+- On the `layout` file add `@yield('content')` (need to be the same section that you need to appear) where you need the `section` to appear
 
 Here are the example files:
 
@@ -355,3 +355,7 @@ Here are the example files:
     </body>
 </html>
 ```
+
+## Section 8: css & images
+
+On the directories that `Laravel` creates for us when we start the project; we got a `public` folder that is the directory that will expose to the browser so you can put your statics files there.
