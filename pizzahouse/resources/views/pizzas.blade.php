@@ -72,11 +72,11 @@
             <div class="title m-b-md">
                 Pizza List
             </div>
-            <p>{{ $type }} - {{ $base }} - {{ $price }}</p>
-            
-            @for($i = 0; $i < 5; $i++)
-                <p>The value of i is {{ $i }}</p>
+
+            @for($i = 0; $i < count($pizzas); $i++)
+                <p>{{ $pizzas[$i]['type'] }}</p>
             @endfor
+
         </div>
     </div>
 </body>
