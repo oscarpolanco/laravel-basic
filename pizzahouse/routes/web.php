@@ -18,7 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/pizzas', function () {
-    return view('pizzas'); // return a view
-    // return 'pizzas!;' // return a string and convert to text/html
-    // return [name => 'veg pizza', 'base' => 'classic'] // return an array and it will convert it to a JSON  
+    return view('pizzas', ['type' => 'hawaiiian', 'base' => 'cheese crush']);
 });
