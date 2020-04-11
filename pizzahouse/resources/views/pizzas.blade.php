@@ -86,6 +86,10 @@
                 <p>You don't have chessy crust</p>
             @endunless
 
+            @php
+                $name = 'shaun';
+                echo($name);
+            @endphp
         </div>
     </div>
 </body>
