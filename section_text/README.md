@@ -139,3 +139,48 @@ On `Blade` you have some directives that are gonna help us to control the way th
         echo($name);
     @endphp
     ```
+
+## Section 6: Blade loops
+
+On `Blade` we can `loop` throw the items that we receive from the `routes` like the following examples:
+
+For this example we send some data in an `array` in the `/pizzas` route:
+
+`route/web.php`
+
+```php
+Route::get('/pizzas', function () {
+
+    $pizzas = [
+        ['type' => 'hawaiian', 'base' => 'chessy crust'],
+        ['type' => 'volcano', 'base' => 'garlic crust'],
+        ['type' => 'veg supreme', 'base' => 'thin & crispy']
+    ];
+
+    return view('pizzas', ['pizzas' => $pizzas]);
+});
+```
+
+- `for`: Loop the item along as on each cycle the condition that you put to match.
+
+    ```php
+    @for($i = 0; $i < 5; $i++)
+        <p>{{ $pizzas[$i]['type'] }}</p>
+    @endfor
+    ```
+- `forEach`: Loop throw every item on a `array`
+
+    ```php
+    @foreach ($pizzas as $pizza)
+        <div>
+            {{ $loop->index }} {{ $pizza['type'] }} - {{ $pizza['base'] }}
+            @if($loop->first)
+                <span>First in the loop</span>
+            @endif
+            @if($loop->last)
+                <span>Last in the loop</span>
+            @endif
+        </div>
+    @endforeach
+    ```
+    The `forEach` have also access an object call `$loop` that have some information like the `index` of the current cycle or the `first` and `last` property that are only `true` in certain point of the cycles.
