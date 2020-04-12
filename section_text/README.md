@@ -393,3 +393,65 @@ Route::get('/pizzas/{id}', function ($id) {
 ### Note:
 
 We create a `details` view for the example
+
+## Section 11: Controllers
+
+Like we said before `Laravel` uses a `model`; `view`; `controller` design param. The `controller` register functions that we call `actions` that fire when a certain route handler needs it. At this moment on the example, we are not using the `controllers` just the `view`. Here is the example of creating and use the `controller`.
+
+- First on the root of your project use artisan to create the controller with the following command:
+    `php artisan make:controller NameOfYourController`
+- Go to the `app/HTTP/Controllers`
+- Go to the new file that you create before with the `artisan` command
+- Inside of the class add the logic that you need to run when a route handler needs (Here are an example using the logic that we add in the past)
+
+    `PizzaController.php`
+
+    ```php
+    <?php
+
+    namespace App\Http\Controllers;
+
+    use Illuminate\Http\Request;
+
+    class PizzaController extends Controller
+    {
+        public function index()
+        {
+            $pizzas = [
+                ['type' => 'hawaiian', 'base' => 'chessy crust'],
+                ['type' => 'volcano', 'base' => 'garlic crust'],
+                ['type' => 'veg supreme', 'base' => 'thin & crispy']
+            ];
+
+            return view('pizzas', [
+                'pizzas' => $pizzas,
+                'name' => request('name'),
+                'age' => request('age')
+            ]);
+        }
+
+        public function show($id)
+        {
+            return view('details', ['id' => $id]);
+        }
+    }
+    ```
+- Go to your `routes` and eliminate all the callback functions (we are using the previews examples) and use the class that you created on the `controller` file.
+
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/pizzas', 'PizzaController@index');
+Route::get('/pizzas/{id}', 'PizzaController@show');
+```
+
+### Notes
+
+- The functions that we create on the `controller` call `actions`
+- `index` and `show` are naming conventions that we gonna target in a later section
