@@ -455,3 +455,15 @@ Route::get('/pizzas/{id}', 'PizzaController@show');
 
 - The functions that we create on the `controller` call `actions`
 - `index` and `show` are naming conventions that we gonna target in a later section
+
+## Section 12: Mysql
+
+On the begining as a pre-requisite we need to install `Mysql` becuase we are gonna store the database there. So at this moment we need to create our database. Here are the steps that we follow (I'm using mac):
+
+- On your console type the following command: `mysql -u root -p`
+- When you access to `Mysql` use this command to create the database: `create database nameofyourdatabase;`
+- Go to your `.env` file in the root of your project
+- Update the following constants:
+    * `DB_DATABASE` => Use the name of your database.
+    * `DB_USERNAME` => Use your database `username`
+    * `DB_PASSWORD` => Put the database `password`
