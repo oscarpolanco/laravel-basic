@@ -380,3 +380,16 @@ Route::get('/pizzas', function () {
     ]);
 });
 ```
+## Section 10: Routes parameters (Wildcard)
+
+The `route parameter` or `wildcard` is like a `query parameter` without a variable and don't need a question mark is actually part of the url. To catch that parameter we just need to create a route that match the url that containg the `route parameter`
+
+```php
+Route::get('/pizzas/{id}', function ($id) {
+    return view('details', ['id' => $id]);
+});
+```
+
+### Note:
+
+We create a `details` view for the example
