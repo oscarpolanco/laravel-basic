@@ -467,3 +467,50 @@ On the begining as a pre-requisite we need to install `Mysql` becuase we are gon
     * `DB_DATABASE` => Use the name of your database.
     * `DB_USERNAME` => Use your database `username`
     * `DB_PASSWORD` => Put the database `password`
+
+## Section 13: Migration basic
+
+The `migrations` allow us programmable from our code to define the structure of the tables in our `database` on `Laravel` we achieve this with the `migrations` files. This files are placed in the `database/migration` directory and are created by `artisan` and have a `class` that represent our `migration` with 2 functions the `up` function is responsible for creating and defining the structure of the `table` and the `down` function that `drop` the `table` if exists.
+
+### Basics of creating a table
+
+On the `up` function we have a `schema::create` that receive the name of the table and a function with all his columns like the example we got next:
+
+```php
+public function up()
+{
+    Schema::create('users', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->timestamp('email_verified_at')->nullable();
+        $table->string('password');
+        $table->rememberToken();
+        $table->timestamps();
+    });
+}
+```
+
+- `id()` => Add an `id` and increment its values each time a record is added.
+- `string()` => Add a column that recive a `string`.
+- `string()->unique()` => Add a column that recive a `string` and should be `unique`.
+- `timestamp()` => Add a `time` value to the column.
+- `timestamp()->nullable()` => Add a `time` value to the column and can be null.
+- `rememberToken()` => Token field.
+- `timestamps()` => Add a `timestamp` using the server clock.
+
+### Creating a migration and add columns to your table
+
+To create your `migration` you just need to:
+
+- On your root directory use the `artisan make` command for `migrations`
+    `php artisan make:migration name_of_your_migration_file`
+- Then check on your `database/migrations` directory if your `migration` file is created
+- On that `migration` file in the `up` function add every column that you need
+- To add the `table` on your `database` just run the `artisan migrate` command; that will run the `up` function on every `migration` file
+    `php artisan migrate`
+- Check on `Mysql` if your table exists
+
+#### Note
+
+If you have issues creating the table you can use the `php artisan migrate:fresh` but be careful because it will drop all tables and run all the migrations again.
